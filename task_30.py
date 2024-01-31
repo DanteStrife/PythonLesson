@@ -129,23 +129,3 @@ main()
 
 
 
-
-
-
-
-'''
-Черновик ___
-            line_number = int(input('Введите номер строки: '))
-            with open(file_name, 'r', encoding="utf-8") as file:
-                lines = file.readlines()
-                if line_number < 1 or line_number > len(lines):
-                    print('Некорректный номер строки.')
-                    return
-                with open(file_2, 'w', encoding="utf-8") as file:
-                    file.write(lines[line_number - 1])
-                    for el in lines:
-                        if el != line_number - 1:
-                            file.write(el)
-                            print('Копирование строки успешно.')
- '''
-
