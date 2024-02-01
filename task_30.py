@@ -114,8 +114,5 @@ def main():
         elif command == "c":
             copy_file(file_name, file_2)
 
+
 main()
-
-
-
-
