@@ -60,12 +60,6 @@ def create_file(file_name):
         f_writer.writeheader()
 
 
-def create_file_2(file_2):
-    with open(file_2, "w", encoding="utf-8") as data:
-        f_writer = DictWriter(data, fieldnames=["Имя", "Фамилия", "Телефон"])
-        f_writer.writeheader()
-
-
 def read_file(file_name):
     with open(file_name, encoding="utf-8") as data:
         f_reader = DictReader(data)
@@ -88,12 +82,13 @@ def write_file(file_name):
 
 
 def copy_file(file_name, file_2):
-    list_transition = list(read_file(file_name))
-    line_number = int(input('Введите номер строки: '))
-    result = [list_transition[line_number - 1]]
+    with open(file_name, "r", encoding="utf-8") as file:
+        line_number = int(input('Введите номер строки: '))
+        obj = read_file(file_name)[line_number - 1]
+        result = []
+        result.append(obj)
     if line_number < 1 or line_number > len(file_name):
         print('Некорректный номер строки.')
-        return
     with open(file_2, 'w', encoding="utf-8", newline='') as data:
         f_writer = DictWriter(data, fieldnames=['Имя', 'Фамилия', 'Телефон'])
         f_writer.writeheader()
@@ -119,12 +114,7 @@ def main():
         elif command == "c":
             copy_file(file_name, file_2)
 
-create_file_2(file_2)
-
 main()
-
-
-
 
 
 
