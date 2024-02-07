@@ -1,20 +1,5 @@
-'''
-Задача №49. Создать телефонный справочник с
-возможностью импорта и экспорта данных в формате .txt. Фамилия, Имя, Номер телефона
- - данные , которые должны находиться в файле.
- 1. Программа должна выводить данные.
- 2. Программа должна сохранять данне в текстовом файле.
- 3. Пользователь может ввести одну из
- характеристик для определенной
- записи(например имя или фамилию человека)
- 4.Использование функций. Ваша программа не должна быть линейной.
-'''
-
 from csv import DictReader, DictWriter
 from os.path import exists
-
-file_name = "phone.csv"
-file_2 = "target.csv"
 
 
 class NameError:
@@ -28,10 +13,6 @@ class PhoneError:
 
 
 def get_user_data():
-    first_name = input("Введите имя пользователя: ")
-    last_name = input("Введите фамилию пользователя: ")
-    phone_number = int(input("Введите номер телефона: "))
-
     flag = False
     while not flag:
         try:
@@ -60,6 +41,9 @@ def create_file(file_name):
         f_writer.writeheader()
 
 
+file_name = "phone.csv"
+
+
 def read_file(file_name):
     with open(file_name, encoding="utf-8") as data:
         f_reader = DictReader(data)
@@ -81,21 +65,6 @@ def write_file(file_name):
         f_writer.writerows(res)
 
 
-def copy_file(file_name, file_2):
-    with open(file_name, "r", encoding="utf-8") as file:
-        line_number = int(input('Введите номер строки: '))
-        obj = read_file(file_name)[line_number - 1]
-        result = []
-        result.append(obj)
-    if line_number < 1 or line_number > len(file_name):
-        print('Некорректный номер строки.')
-    with open(file_2, 'w', encoding="utf-8", newline='') as data:
-        f_writer = DictWriter(data, fieldnames=['Имя', 'Фамилия', 'Телефон'])
-        f_writer.writeheader()
-        f_writer.writerows(result)
-        print('Копирование строки успешно.')
-
-
 def main():
     while True:
         command = input("Введите комманду: ")
@@ -111,8 +80,6 @@ def main():
                 print("Файл не создан!Создайте его")
                 continue
             print(read_file(file_name))
-        elif command == "c":
-            copy_file(file_name, file_2)
 
 
 main()
